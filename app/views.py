@@ -23,7 +23,7 @@ class IndexView(View):
 
 class LivrosView(View):
     def get(self, request, *args, **kwargs):
-        livros = livros.objects.all()
+        livros = livro.objects.all()
         return render(request, 'livros.html', {'livros': livros})
 
     # def post(self, request, *args, **kwargs):
