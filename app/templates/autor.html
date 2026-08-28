@@ -86,36 +86,26 @@ bg-success">
 
     <div class="container mt-5">
 
-        <h2 class="mb-4">Tabela de Livros</h2>
+        <h2 class="mb-4">Tabela de Autores</h2>
 
         <table class="table">
 
             <thead>
 
                 <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Autor</th>
-                    <th scope="col">Editora</th>
-                    <th scope="col">Gênero</th>
-                    <th scope="col">Preço</th>
-                    <th scope="col">Data Publicação</th>
-                    <th scope="col">Status</th>
+                    <th scope="col">nome</th>
+                    <th scope="col">cidade</th>
                 </tr>
 
             </thead>
 
             <tbody>
 
-                {% for Autor in Autor %}
+                {% for autores in autores %}
 
                 <tr>
-                    <td>{{ livros.nome }}</td>
-                    <td>{{ livros.autor }}</td>
-                    <td>{{ livros.editora }}</td>
-                    <td>{{ livros.genero }} </td>
-                    <td>{{ livros.preco }}</td>
-                    <td>{{ livros.data_plub }}</td>
-                    <td>{{ livros.status }}</td>
+                    <td>{{ autores.nome }}</td>
+                    <td>{{ autores.cidade }}</td>
                 </tr>
 
                 {% endfor %}
