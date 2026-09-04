@@ -50,7 +50,7 @@ urlpatterns = [
 
     path('livros/', LivrosView.as_view(), name='livros'),
 
-    path('reserva/', EmprestimoView.as_view(), name='reserva'),
+    # path('reserva/', EmprestimoView.as_view(), name='reserva'),
 
     path('cidade/', CidadesView.as_view(), name='cidade'),
 

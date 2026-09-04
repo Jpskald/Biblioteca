@@ -30,10 +30,10 @@ class LivrosView(View):
     #     pass
 
 
-class EmprestimoView(View):
-    def get(self, request, *args, **kwargs):
-        reservas = Emprestimo.objects.all()
-       return render(request, 'emprestimos.html', {'reservas': reservas})
+# class EmprestimoView(View):
+#     def get(self, request, *args, **kwargs):
+#         reservas = Emprestimo.objects.all()
+#         return render(request, 'emprestimos.html', {'reservas': reservas})
     
 class CidadesView(View):
     def get(self, request, *args, **kwargs):
