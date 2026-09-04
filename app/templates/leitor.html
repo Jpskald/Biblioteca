@@ -86,7 +86,7 @@ bg-success">
 
     <div class="container mt-5">
 
-        <h2 class="mb-4">Tabela de Autores</h2>
+        <h2 class="mb-4">Tabela de Leitores</h2>
 
         <table class="table">
 
@@ -94,7 +94,8 @@ bg-success">
 
                 <tr>
                     <th scope="col">nome</th>
-                    <th scope="col">cidade</th>
+                    <th scope="col">email</th>
+                    <th scope="col">cpf</th>
                 </tr>
 
             </thead>
@@ -105,7 +106,8 @@ bg-success">
 
                 <tr>
                     <td>{{ leitores.nome }}</td>
-                    <td>{{ autores.cidade }}</td>
+                    <td>{{ leitores.email }}</td>
+                    <td>{{ leitores.cpf }}</td>
                 </tr>
 
                 {% endfor %}
