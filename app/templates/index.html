@@ -1,6 +1,13 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="pt-BR">
 <head>
+    <!-- Configurações PWA -->
+<link rel="manifest" href="{% static 'manifest.json' %}">
+<meta name="theme-color" content="#28a745">
+<link rel="apple-touch-icon" href="{% static 'icons/icon-192x192.png' %}">
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,
 initial-scale=1.0">
@@ -68,5 +75,17 @@ er.min.js"></script>
 <script
 src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.mi
 n.js"></script>
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function() {
+      navigator.serviceWorker.register('/sw.js').then(function(registration) {
+        console.log('PWA: ServiceWorker registrado com sucesso no escopo:', registration.scope);
+      }).catch(function(err) {
+        console.log('PWA: Falha no registro do ServiceWorker:', err);
+      });
+    });
+  }
+</script>
+
 </body>
 </html>
