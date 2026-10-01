@@ -1,136 +1,148 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
+    <!-- Configurações PWA -->
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#28a745">
+    <link rel="apple-touch-icon" href="/static/icons/icon-192x192.png">
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,
-    initial-scale=1.0">
-    <title>Página Inicial</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Leitores</title>
     <!-- Incluindo Bootstrap CSS -->
-    <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css
-/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-dark
-bg-success">
-
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
         <a class="navbar-brand" href="/">Biblioteca</a>
-
-        <button class="navbar-toggler" type="button"
-            data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false"
-            aria-label="Toggle navigation">
-
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-
         </button>
-
-        <div class="collapse navbar-collapse"
-            id="navbarNav">
-
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-
-                <li class="nav-item">
-                    <a class="nav-link text-dark"
-                        href="/">Home</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-dark"
-                        href="/livros/">Livros</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-dark"
-                        href="/reserva/">Reserva</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-dark"
-                        href="/cidade/">Cidade</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-dark"
-                        href="/autor/">Autor</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-dark"
-                        href="/editor/">Editora</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-dark"
-                        href="/genero/">Genero</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-dark"
-                        href="/leitor/">Leitor</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link text-dark"
-                        href="/admin/">Administração</a>
-                </li>
-
+                <li class="nav-item"><a class="nav-link text-dark" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/livros/">Livros</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/reserva/">Reserva</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/cidade/">Cidade</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/autor/">Autor</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/editor/">Editora</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/genero/">Genero</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/leitor/">Leitor</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="/admin/">Administração</a></li>
             </ul>
-
         </div>
     </nav>
 
     <div class="container mt-5">
-
         <h2 class="mb-4">Tabela de Leitores</h2>
 
+        <!-- Formulário PWA Offline -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Adicionar Leitor</h5>
+                <form id="form-leitor">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="nome_leitor" placeholder="Nome do Leitor" required>
+                    </div>
+                    <!-- Adicionei CPF e Email que estavam na tabela -->
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email_leitor" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="cpf_leitor" placeholder="CPF" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">Salvar Leitor</button>
+                </form>
+            </div>
+        </div>
+
         <table class="table">
-
             <thead>
-
                 <tr>
                     <th scope="col">nome</th>
                     <th scope="col">email</th>
                     <th scope="col">cpf</th>
                 </tr>
-
             </thead>
-
             <tbody>
-
-                {% for leitores in leitores %}
-
+                {% for leitor in leitores %}
                 <tr>
-                    <td>{{ leitores.nome }}</td>
-                    <td>{{ leitores.email }}</td>
-                    <td>{{ leitores.cpf }}</td>
+                    <td>{{ leitor.nome }}</td>
+                    <td>{{ leitor.email }}</td>
+                    <td>{{ leitor.cpf }}</td>
                 </tr>
-
                 {% endfor %}
-
             </tbody>
-
         </table>
-
     </div>
 
-    <!-- Incluindo jQuery e Bootstrap JS -->
+    <!-- Incluindo scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- Lógica do PWA Offline Sync -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.10.0/localforage.min.js"></script>
+    <script>
+    document.getElementById('form-leitor').addEventListener('submit', function(event) {
+        event.preventDefault(); // Impede a página de recarregar
+        
+        const dadosLeitor = {
+            id: Date.now(), // ID temporário
+            nome: document.getElementById('nome_leitor').value,
+            email: document.getElementById('email_leitor').value,
+            cpf: document.getElementById('cpf_leitor').value
+        };
 
-    <script
-        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        if (navigator.onLine) {
+            enviarParaODjango(dadosLeitor);
+        } else {
+            salvarOfflineNoIndexedDB(dadosLeitor);
+        }
+    });
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/di
-st/umd/popper.min.js"></script>
+    // Função que faltava no exemplo: Enviar online
+    function enviarParaODjango(dados) {
+        // Obter o token CSRF dos cookies do Django
+        const csrfToken = document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
 
-    <script
-        src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/b
-ootstrap.min.js"></script>
+        fetch('/api/leitor/criar/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify(dados)
+        }).then(response => {
+            if (response.ok) {
+                alert("Leitor salvo com sucesso!");
+                location.reload(); // Recarrega para ver na tabela
+            } else {
+                alert("Erro ao salvar no servidor.");
+            }
+        }).catch(err => {
+            console.error(err);
+            // Se falhar o envio (ex: rede caiu logo após o clique), salva offline
+            salvarOfflineNoIndexedDB(dados);
+        });
+    }
 
+    function salvarOfflineNoIndexedDB(dados) {
+        localforage.getItem('fila_leitores').then(function(fila) {
+            fila = fila || [];
+            fila.push(dados);
+            localforage.setItem('fila_leitores', fila).then(function() {
+                alert("Você está offline! Leitor salvo no celular. Será enviado quando a internet voltar.");
+                document.getElementById('form-leitor').reset(); // limpa o formulário
+                
+                if ('serviceWorker' in navigator && 'SyncManager' in window) {
+                    navigator.serviceWorker.ready.then(function(swRegistration) {
+                        return swRegistration.sync.register('sync-leitores');
+                    });
+                }
+            });
+        });
+    }
+    </script>
 </body>
-
 </html>

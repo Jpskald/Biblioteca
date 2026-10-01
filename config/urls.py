@@ -21,4 +21,7 @@ urlpatterns = [
     
     # Rota do PWA Service Worker
     path('sw.js', TemplateView.as_view(template_name='sw.js', content_type='application/javascript'), name='sw.js'),
+    
+    # Rota da API Offline
+    path('api/leitor/criar/', api_criar_leitor, name='api_criar_leitor'),
 ]

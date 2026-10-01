@@ -24,3 +24,35 @@ self.addEventListener('fetch', event => {
       })
   );
 });
+
+importScripts('https://cdnjs.cloudflare.com/ajax/libs/localforage/1.10.0/localforage.min.js');
+
+self.addEventListener('sync', event => {
+  if (event.tag === 'sync-leitores') {
+    console.log("Internet voltou! Sincronizando dados pendentes...");
+    event.waitUntil(enviarDadosPendentes());
+  }
+});
+
+function enviarDadosPendentes() {
+  return localforage.getItem('fila_leitores').then(fila => {
+    if (!fila || fila.length === 0) return;
+
+    // Envia cada item da fila para a API do Django
+    let promessas = fila.map(dados => {
+      return fetch('/api/leitor/criar/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dados)
+      });
+    });
+
+    // Se tudo for enviado com sucesso, limpa a fila do IndexedDB
+    return Promise.all(promessas).then(() => {
+      console.log("Sincronização concluída com sucesso!");
+      return localforage.removeItem('fila_leitores');
+    });
+  });
+}
